@@ -1,0 +1,16 @@
+.header-container{
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	background-color: rgba(30, 144, 255, 0.8);
+}
+.main{
+	font-size: 22px;
+	height: 40px;
+	margin: 0 50px;
+	line-height: 40px;
+	color: #fff;
+}
+
+
+

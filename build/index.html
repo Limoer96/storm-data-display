@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="http://localhost:8888/style.css" rel="stylesheet">
+        <style>
+            #app{
+                width: 100%;
+                height: 2750px;
+                /*background-color: rgba(169, 169, 169, 0.5);*/
+            }
+            body{
+                background-color: rgba(169, 169, 169, 0.5);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script src="http://localhost:8888/webpack-dev-server.js"></script>
+        <!--下面这三个文件是有引入顺序的哦，千万别搞混了-->
+        <script src="http://localhost:8888/manifest.bundle.js"></script>
+        <script src="http://localhost:8888/vendor.bundle.js"></script>
+		<script src="http://localhost:8888/main.bundle.js"></script>
+    </body>
+</html>
