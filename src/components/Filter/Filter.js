@@ -164,7 +164,7 @@ export default class TaskChoice extends Component {
 				onOk={this.handleOk}
 				onCancel={this.handleCancel}
 			>
-				<div>WebsiteName<Input
+				<div>WebsiteName<Input disabled={true}
 					style={{marginBottom: 16}} 
 					value={this.state.site || ''} 
 					onChange={(e) => this.setState({site: e.target.value})}/>

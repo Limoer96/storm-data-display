@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Popover, Collapse } from 'antd';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { MeasureContent } from '../../public/util.js';
 const Panel = Collapse.Panel;
 // 这是一个待完成的映射表
@@ -95,7 +96,7 @@ export default class Showller extends Component {
 		let content = new MeasureContent(this.state.contents);
         content.init();
         let list = content.splitBySite();
-        // console.log(list);
+        console.log(list);
         let speciaList = content.getSpeciaList(); // 最终每个主题展示一次
 		let style={
 			width: 1250,
@@ -122,7 +123,18 @@ export default class Showller extends Component {
                         list.map((item, index) => {
                             return <Popover key={index + 40} 
                                 title={MapSiteIdentifierToSiteName[item[0]]?MapSiteIdentifierToSiteName[item[0]]: '未知分类'} 
-                                content={item[3].map((subj, index) => {return <p style={{paddingLeft: 20}} key={index + 2017}>{MapIdentifierToSite[subj[0]] ? MapIdentifierToSite[subj[0]]:'未知主题'}&nbsp;&nbsp;&nbsp;&nbsp;<span>{subj[1]}</span></p>})}>
+                                content={
+                                    <BarChart width={400} height={270} data={item[3]}
+                                        margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+                                        <XAxis dataKey='name'/>
+                                        <YAxis/>
+                                        <CartesianGrid strokeDasharray='3 3'/>
+                                        <Tooltip />
+                                        <Legend />
+                                        <Bar dataKey='ux' fill='#8884d8'/>
+                                    </BarChart>
+                                }
+                                >
                                 <div className='site-box' key={index + 1000} style={{width: 80, height: 80, textAlign: 'center', borderRadius: 4, backgroundColor: '#D3D3D3', float:'left', marginLeft: 40, marginTop: 10}}>
                                     <p style={{fontWeight: 'bold', fontSize: 14, paddingTop: 5}}>{MapSiteIdentifierToSiteName[item[0]]?MapSiteIdentifierToSiteName[item[0]]: '未知分类'}</p>
                                     <p style={{fontSize: 32}}>{item[1]}</p>

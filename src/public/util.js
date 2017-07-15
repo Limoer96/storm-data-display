@@ -13,6 +13,16 @@
 	}
 */
 
+const mapIdentifierToName = {
+	'Aa': '体育',
+	'Ab': '国内',
+	'Ac': '国际',
+	'Ad': '热点',
+	'Ae': '财经',
+	'Af': '游戏',
+	'Ag': '其他分类'
+}
+
 
 
 // 初次存储的格式为[['id', timestamp]]
@@ -111,15 +121,16 @@ export class MeasureContent {
 	splitBySite() {
 		// 数据整形，切分为站点标识
 		// console.log(this.countList.length);
+		let colors = ['#8884d8', '#83a6ed', '#8dd1e1', '#82ca9d', '#a4de6c', '#d0ed57', '#ffc658'];
 		for( let item of this.countList ) {
-			this.siteList.push([item[0].slice(0, 1), item[1], item[0], [[item[0], item[1]]]]);
+			this.siteList.push([item[0].slice(0, 1), item[1], item[0], [{name: mapIdentifierToName[item[0]], ux: item[1], fill: colors[(Math.random()*7).toFixed(0)]}]]);
 		}
 		let tempList = [];
 		let temp = this.siteList[0];
 		for(let i = 1; i < this.siteList.length; i++){
 			if(temp[0] === this.siteList[i][0]){
 				temp[1] += this.siteList[i][1];
-				temp[3].push([this.siteList[i][2], this.siteList[i][1]]);
+				temp[3].push({name: mapIdentifierToName[this.siteList[i][2]],ux: this.siteList[i][1], fill: colors[(Math.random()*7).toFixed(0)]});
 			}else{
 				tempList.push(temp);
 				temp = this.siteList[i];
