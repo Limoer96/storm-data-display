@@ -1,4 +1,4 @@
-import { Collapse, Input, Button, Popover, Alert } from 'antd';
+import { Collapse, Input, Button, Popover, Alert, Icon } from 'antd';
 import React, { Component } from 'react';
 import { MeasureTime } from '../../public/util.js';
 const Panel = Collapse.Panel;
@@ -27,7 +27,9 @@ export default class SearchBox extends Component {
 	constructor( props ) {
 		super( props );
 		this.state = {
-			news: INIT_NEWS
+			news: INIT_NEWS,
+			index: 10,
+			renderedNews: INIT_NEWS.slice(0,10)
 		}
 	}
 	search = (value) => {
@@ -37,9 +39,21 @@ export default class SearchBox extends Component {
 			return res.json();
 		}).then((json) => {
 			this.setState({
-				news: json
+				news: json,
+				renderedNews: json.slice(0, 10)
 			})
 		});
+	}
+	changeNews = () => {
+		// 每次渲染下一个十条
+		let {index, news} = this.state;
+		let len = news.length;
+		if(len > 10 && index < len){
+			this.setState({
+				renderedNews: news.slice(index, index+10),
+				index: index + 10
+			})
+		}
 	}
 	render() {
 		let timespan = new MeasureTime(this.state.news).init();
@@ -80,13 +94,13 @@ export default class SearchBox extends Component {
 				<p style={{fontSize: 26, marginLeft: -20, paddingTop: 10}}>搜索新闻</p>
 				<Input.Search placeholder='搜索新闻...' onSearch={this.search} style={{width: 400, marginTop: 50}}></Input.Search>
 				<Alert showIcon style={{width: 400, marginTop: 10}} type='info' message='输入更多关键词可以获得更准确的结果哦~'></Alert>
-				<p style={{fontSize: 32, margin: 10}}>搜索结果</p>
+				<p style={{fontSize: 32, margin: 10}}>搜索结果<span style={{fontSize: 16, marginRight: 50}}>(每次只最多显示十条，点击按钮以切换)</span>&nbsp;<Button type='primary' onClick={this.changeNews}><Icon type='reload'/>reload</Button></p>
 				<hr />
 			</div>
 			<div style={{width: 800, height: 270, marginTop: 20, overflow: 'auto'}}>
 			<Collapse bordered={false} defaultActiveKey={['0']}>
 				{
-					this.state.news.map((item, index) => {
+					this.state.renderedNews.map((item, index) => {
 						return <Panel style={item_style} key={index} header={item.title}>
 							<p>{item.content}</p>
 							<p style={{float: 'right'}}>来源：<a href={item.url} target='_blank'>{item.source}</a></p>

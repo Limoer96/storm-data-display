@@ -144,11 +144,11 @@ export default class Showller extends Component {
                     }
                 </div>
                 <div style={{width: '49%', height: 300, float: 'left', marginLeft: '2%', borderRadius: 7, backgroundColor: 'rgba(211, 211, 211, 0.1)', overflow: 'auto'}}>
-                    <h2>部分新闻展示</h2>
-                    <div style={{width: 500}}><Collapse>
+                    <h2 style={{marginBottom: 10, marginLeft: 10, marginTop: 10}}>部分新闻展示</h2>
+                    <div style={{width: 500, marginLeft: 30}}><Collapse>
                         {
                             speciaList.map((item, index) => {
-                                return <Panel header={MapIdentifierToSite[item.identifier]? MapIdentifierToSite[item.identifier] : '默认或者并未分组新闻'} key={index + 5678}>
+                                return <Panel header={MapIdentifierToSite[item.identifier]? MapIdentifierToSite[item.identifier] : '默认或者并未分组新闻'+ '--------' + item.title} key={index + 5678}>
                                     <p style={{fontSize: 14, fontWeight: 'bold'}}>{item.title}</p>
                                     <p style={{textIndent: 8}}>
                                         {item.content}

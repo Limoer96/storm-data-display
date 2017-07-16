@@ -99,7 +99,8 @@ export class MeasureContent {
 				content: item['content'],
 				source: item['source'],
 				time: item['pub_time'],
-				url: item['url']
+				url: item['url'],
+				title: item['title']
 			});
 		}
 	}
