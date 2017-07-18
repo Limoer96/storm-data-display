@@ -63,6 +63,7 @@ export default class TaskChoice extends Component {
 		let datas = e.target.dataset;
 		let identifier = datas.info;
 		let desc = `${datas.site}/${datas.subject}`;
+		let { changeTask } = this.props;
 		fetch(`http://localhost:3000/tasks/${identifier}/post/?desc=${desc}`, { method: 'get', mode: 'cors'}).then((res) => {
 			return res.json();
 		}).then((json) => {
@@ -70,6 +71,7 @@ export default class TaskChoice extends Component {
 			if(json.status === 'ok!'){
 				console.log('ok!');
 				message.success('新建任务成功！');
+				changeTask(); // 修改状态
 			}else if(json.status === 'more'){
 				message.warning('单次任务只能创建一次主题下的任务!');
 			}else{

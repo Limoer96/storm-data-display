@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Popover, Collapse } from 'antd';
+import { Popover, Collapse, Button, Icon, Alert } from 'antd';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { MeasureContent } from '../../public/util.js';
 import { MapIdentifierToSite, MapSiteIdentifierToSiteName } from '../../public/maps.js';
@@ -67,7 +67,7 @@ export default class Showller extends Component {
 		}
 	}
 
-    componentDidMount() {
+    getData = () => {
         fetch('http://localhost:3000/contents/countbyidentifier', {method: 'get', mode: 'cors'}).then((res) => {
             return res.json();
         }).then((json) => {
@@ -77,6 +77,13 @@ export default class Showller extends Component {
         })
     }
 
+    componentDidMount() {
+        this.getData();
+    }
+
+    refresh =() => {
+        this.getData();
+    }
 
 	render() {
 		let content = new MeasureContent(this.state.contents);
@@ -96,12 +103,17 @@ export default class Showller extends Component {
             position: 'relative'
 		}
 		return <div id='show' style={style}>
+            <p style={{position: 'absolute', top: 30, right: 50}}>
+                <Button onClick={this.refresh}>
+                    <Icon type='reload'/>
+                </Button>
+            </p>
 			<div>
 				<p style={{fontSize: 26, marginLeft: -20, paddingTop: 10}}>统计数据</p>
 			</div>
 			<div style={{fontSize: 24}}>
 				<p style={{fontSize: 32}}>数量</p>
-				<p>当前新闻总量：<span style={{backgroundColor: '#A9A9A9'}}>&nbsp;{content.getAllCount()}&nbsp;</span></p>
+				<p>当前新闻总量：<span style={{backgroundColor: '#A9A9A9', border: 'none', borderRadius: 3, color: '#FFF'}}>&nbsp;{content.getAllCount()}&nbsp;</span></p>
 			</div>
             <div style={{width: '100%', height: 300, marginTop: 40}}>
                 <div style={{width: '49%', height: 300, float: 'left', backgroundColor: 'rgba(211, 211, 211, 0.1)', borderRadius: 7}}>
@@ -121,9 +133,9 @@ export default class Showller extends Component {
                                     </BarChart>
                                 }
                                 >
-                                <div className='site-box' key={index + 1000} style={{width: 80, height: 80, textAlign: 'center', borderRadius: 4, backgroundColor: '#D3D3D3', float:'left', marginLeft: 40, marginTop: 10}}>
-                                    <p style={{fontWeight: 'bold', fontSize: 14, paddingTop: 5}}>{MapSiteIdentifierToSiteName[item[0]]?MapSiteIdentifierToSiteName[item[0]]: '未知分类'}</p>
-                                    <p style={{fontSize: 32}}>{item[1]}</p>
+                                <div className='site-box' key={index + 1000} style={{width: 80, height: 80, textAlign: 'center', borderRadius: 4, backgroundColor: '#A9A9A9', float:'left', marginLeft: 40, marginTop: 10}}>
+                                    <p style={{fontWeight: 'bold', fontSize: 14, paddingTop: 5, color: '#FFF'}}>{MapSiteIdentifierToSiteName[item[0]]?MapSiteIdentifierToSiteName[item[0]]: '未知分类'}</p>
+                                    <p style={{fontSize: 32, color: '#FFF'}}>{item[1]}</p>
                                 </div>
                             </Popover>
                         })
@@ -131,7 +143,8 @@ export default class Showller extends Component {
                 </div>
                 <div style={{width: '49%', height: 300, float: 'left', marginLeft: '2%', borderRadius: 7, backgroundColor: 'rgba(211, 211, 211, 0.1)', overflow: 'auto'}}>
                     <h2 style={{marginBottom: 10, marginLeft: 10, marginTop: 10}}>部分新闻展示</h2>
-                    <div style={{width: 500, marginLeft: 30}}><Collapse>
+                    <div style={{width: 500, marginLeft: 30}}>
+                    <Collapse>
                         {
                             speciaList.map((item, index) => {
                                 return <Panel header={MapIdentifierToSite[item.identifier]? MapIdentifierToSite[item.identifier] : '默认或者并未分组新闻'+ '--------' + item.title} key={index + 5678}>

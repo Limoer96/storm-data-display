@@ -109,8 +109,8 @@ export default class SearchBox extends Component {
 			</div>
 			<div style={{position: 'absolute', width: 400, height: 500, top: 280, right:-40}}>
 				<p style={{fontSize: 24}}>统计:</p>
-				<p style={{fontSize: 32}}>共搜索到：<span style={{backgroundColor: '#A9A9A9', color: '#FFF'}}>{this.state.news.length}</span>条</p>
-				<p style={{fontSize: 28}}>横跨：<span style={{backgroundColor: '#A9A9A9', color: '#FFF'}}>{span.day}</span>天<span style={{backgroundColor: '#A9A9A9', color: '#FFF'}}>{span.hour}</span>小时<span style={{backgroundColor: '#A9A9A9', color: '#FFF'}}>{span.min}</span>分钟</p>
+				<p style={{fontSize: 32}}>共搜索到：<span style={{backgroundColor: '#A9A9A9', color: '#FFF', borderRadius: 3}}>{this.state.news.length}</span>条</p>
+				<p style={{fontSize: 28}}>横跨：<span style={{backgroundColor: '#A9A9A9', color: '#FFF', borderRadius: 3}}>{span.day}</span>天<span style={{backgroundColor: '#A9A9A9', color: '#FFF', borderRadius: 3}}>{span.hour}</span>小时<span style={{backgroundColor: '#A9A9A9', color: '#FFF', borderRadius: 3}}>{span.min}</span>分钟</p>
 				<p style={{marginTop: 20}}>
 					<Popover content={latest} title='最近一条'>
 						<Button type='primary'>最近一条</Button>
