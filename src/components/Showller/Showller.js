@@ -2,23 +2,9 @@ import React, { Component } from 'react';
 import { Popover, Collapse } from 'antd';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { MeasureContent } from '../../public/util.js';
+import { MapIdentifierToSite, MapSiteIdentifierToSiteName } from '../../public/maps.js';
 const Panel = Collapse.Panel;
 // 这是一个待完成的映射表
-const MapIdentifierToSite = {
-	'Aa': '腾讯新闻-财经',
-	'Ba': '新浪新闻-国际',
-    'Bb': '新浪-国内',
-    'Ab': '腾讯-体育',
-    'Cd': '网易新闻-XX'
-}
-
-const MapSiteIdentifierToSiteName = {
-    'A': '腾讯新闻',
-    'B': '网易新闻',
-    'C': '今日头条'
-}
-
-
 // 这是模拟从后台拿到的数据
 const INIT_DATA = [
     {

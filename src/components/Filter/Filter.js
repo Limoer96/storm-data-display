@@ -42,7 +42,9 @@ export default class TaskChoice extends Component {
 			content: '',
 			source: '',
 			time: '',
-			title: ''
+			title: '',
+			link: '',
+			secondLink: ''
 		}
 	}
 
@@ -68,6 +70,8 @@ export default class TaskChoice extends Component {
 			if(json.status === 'ok!'){
 				console.log('ok!');
 				message.success('新建任务成功！');
+			}else if(json.status === 'more'){
+				message.warning('单次任务只能创建一次主题下的任务!');
 			}else{
 				message.error('创建任务失败！');
 			}
@@ -84,7 +88,9 @@ export default class TaskChoice extends Component {
 			source_rule: this.state.source,
 			website_name: this.state.site,
 			country: this.state.country,
-			channel_name: this.state.channel
+			channel_name: this.state.channel,
+			link_rule: this.state.link,
+			second_link_rule: this.state.secondLink
 		})
 		fetch(`http://localhost:3000/rules/${this.state.id}/edit`,
 		 {
@@ -128,6 +134,8 @@ export default class TaskChoice extends Component {
 				source: json.source_rule,
 				time: json.pub_time_rule,
 				title: json.title_rule,
+				link: json.link_rule,
+				secondLink: json.second_link_rule,
 				visible: true
 			});
 			message.success('获取数据成功！');
@@ -203,6 +211,16 @@ export default class TaskChoice extends Component {
 					style={{marginBottom: 16}} 
 					value={this.state.title || ''}
 					onChange={(e) => this.setState({title: e.target.value})}/>
+				</div>
+				<div>LinkPath<Input 
+					style={{marginBottom: 16}} 
+					value={this.state.link || ''}
+					onChange={(e) => this.setState({link: e.target.value})}/>
+				</div>
+				<div>SecondLinkPath<Input 
+					style={{marginBottom: 16}} 
+					value={this.state.secondLink || ''}
+					onChange={(e) => this.setState({secondLink: e.target.value})}/>
 				</div>
 			</Modal>
 		</div>

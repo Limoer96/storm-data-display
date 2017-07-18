@@ -2,13 +2,8 @@ import { Collapse, Input, Button, Popover, Alert, Icon } from 'antd';
 import React, { Component } from 'react';
 import { MeasureTime } from '../../public/util.js';
 const Panel = Collapse.Panel;
-
+import { MapIdentifierToSite } from '../../public/maps.js';
 // 这里需要构造一个Map用于对分类的查找
-
-const MapIdentifierToSite = {
-	'Aa': '腾讯新闻-财经',
-	'Ba': '新浪新闻-国际'
-}
 
 const INIT_NEWS = [
 	
@@ -101,8 +96,9 @@ export default class SearchBox extends Component {
 			<Collapse bordered={false} defaultActiveKey={['0']}>
 				{
 					this.state.renderedNews.map((item, index) => {
+						
 						return <Panel style={item_style} key={index} header={item.title}>
-							<p>{item.content}</p>
+							<p>{item.content.length > 300 ? item.content.slice(0, 300) + '...': item.content}</p>
 							<p style={{float: 'right'}}>来源：<a href={item.url} target='_blank'>{item.source}</a></p>
 							<p style={{float: 'right'}}>发布时间：{item.pub_time}</p>
 							<p style={{float: 'right'}}>分类：{MapIdentifierToSite[item.identifier] ? MapIdentifierToSite[item.identifier]: '默认分类'}</p>

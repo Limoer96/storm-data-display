@@ -1,6 +1,6 @@
 // 工具函数
 
-
+import { MapIdentifierToSite as mapIdentifierToName } from './maps.js';
 /**
 	数据结构：
 	{
@@ -12,18 +12,6 @@
 		identifier: 'Aa'
 	}
 */
-
-const mapIdentifierToName = {
-	'Aa': '体育',
-	'Ab': '国内',
-	'Ac': '国际',
-	'Ad': '热点',
-	'Ae': '财经',
-	'Af': '游戏',
-	'Ag': '其他分类'
-}
-
-
 
 // 初次存储的格式为[['id', timestamp]]
 
