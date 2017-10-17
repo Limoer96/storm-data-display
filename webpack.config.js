@@ -36,6 +36,20 @@ module.exports = {
                     use: 'css-loader'
                 })
             },
+            // {
+            //     test: /\.css$/,
+            //     exclude: /node_modules/,
+            //     use: {
+            //         loader: "css-loader",
+            //         options: {
+            //             modules: true
+            //         }
+            //     }
+            // },
+            // {
+            //     test: /\.css$/,
+            //     use: 'css-loader'
+            // },
             // 使用file-loader加载图片
             {
                 test: /\.(jpg|png|gif)$/,
@@ -44,7 +58,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        // new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin('style.css'),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',

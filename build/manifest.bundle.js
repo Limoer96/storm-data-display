@@ -88,7 +88,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b73c7a6dc52045cfe023"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c18d374962ac6a9ec6e4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -670,7 +670,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		1: 0
+/******/ 		2: 0
 /******/ 	};
 /******/
 /******/ 	// The require function

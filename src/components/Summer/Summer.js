@@ -17,7 +17,6 @@ const INIT_NEWS = [
 	}
 ]
 
-
 export default class SearchBox extends Component {
 	constructor( props ) {
 		super( props );

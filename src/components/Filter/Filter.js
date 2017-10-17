@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Tabs, Card, Button, Spin, Modal, Form, Input, message } from 'antd';
 let TabPane = Tabs.TabPane;
 let FormItem = Form.Item;
-import './Filter.css';
+
+import style from './Filter.css';
 
 
 const INIT_SITES = [
